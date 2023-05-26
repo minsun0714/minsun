@@ -109,16 +109,18 @@ export const SearchInput = styled.input`
   outline: none;
   font-size: 20px;
   font-family: monospace;
+  color: rgba(0, 0, 0, 0.7);
   :hover {
     box-shadow: 1px 1px 1px white inset;
   }
 `;
 
 export const SearchBtn = styled.button`
-  height: 40px;
-  width: 60px;
+  height: 45px;
+  width: 70px;
   border-radius: 5px;
   margin: 5px;
+  padding: 5px 10px 1px;
   border: none;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   background-color: greenyellow;
