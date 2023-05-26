@@ -128,11 +128,7 @@ function Pagination() {
             </Card>
           ))}
         </ul>
-        <PageBtns
-          itemsPerPage={itemsPerPage}
-          totalPages={state.length}
-          onPageChange={handlePageChange}
-        />
+        <PageBtns totalPages={state.length} onPageChange={handlePageChange} />
       </DiscussionsWrapper>
     </Board>
   );
