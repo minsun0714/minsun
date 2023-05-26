@@ -101,15 +101,16 @@ export const SearchWrapper = styled.div`
 
 export const SearchInput = styled.input`
   background-color: aliceblue;
-  padding-left: 20px;
-  height: 40px;
+  padding: 7px 0 7px 20px;
+  height: 35px;
   width: 400px;
   border-radius: 15px;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-  border: none;
+  border: 2px solid skyblue;
   outline: none;
+  font-size: 20px;
+  font-family: monospace;
   :hover {
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3) inset;
+    box-shadow: 1px 1px 1px white inset;
   }
 `;
 
@@ -124,6 +125,6 @@ export const SearchBtn = styled.button`
   color: green;
   cursor: pointer;
   :active {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) inset;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) inset;
   }
 `;
