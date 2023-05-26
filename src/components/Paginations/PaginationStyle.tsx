@@ -15,12 +15,6 @@ export const PageBtn = styled.button`
   cursor: pointer;
 `;
 
-export interface IPageBtns {
-  itemsPerPage: number;
-  totalPages: number;
-  onPageChange: (buttonNumber: number) => void;
-}
-
 export const Board = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,6 +86,7 @@ export const Btn = styled.button`
   background-color: #299ecc;
   padding-right: 8px;
   color: white;
+  cursor: pointer;
 `;
 
 export const SearchWrapper = styled.div`
