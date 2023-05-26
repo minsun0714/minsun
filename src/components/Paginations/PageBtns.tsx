@@ -1,9 +1,11 @@
 import React from "react";
-import { PageBtnWrapper, PageBtn, IPageBtns } from "./PaginationStyle";
+import { PageBtnWrapper, PageBtn } from "./PaginationStyle";
+import { ITEMS_PER_PAGE } from "../../util/constant";
+import { IPageBtns } from "../../util/type";
 
-function PageBtns({ itemsPerPage, totalPages, onPageChange }: IPageBtns) {
+function PageBtns({ totalPages, onPageChange }: IPageBtns) {
   const pages: number[] = [];
-  for (let i = 1; i <= Math.ceil(totalPages / itemsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalPages / ITEMS_PER_PAGE); i++) {
     pages.push(i);
   }
 
