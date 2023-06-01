@@ -65,11 +65,6 @@ export const discussion = createSlice({
       state: Discussion[],
       action: PayloadAction<Discussion>
     ) => {
-      // localStorage.setItem(
-      //   String(action.payload.id),
-      //   JSON.stringify(action.payload)
-      // );
-
       tostify("add");
 
       return [action.payload, ...state];
