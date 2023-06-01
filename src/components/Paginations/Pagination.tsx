@@ -17,26 +17,23 @@ import {
   BtnWrapper,
   Btn,
 } from "./PaginationStyle";
-import useFetch from "../../util/useFetch";
 import Search from "./Search";
+import { useFetch } from "../../util/useFetch";
+import { useDelete } from "../../util/useDelete";
+import { DISCUSSIONS_URL, ITEMS_PER_PAGE } from "../../util/constant";
 
 function Pagination() {
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
-  const dispatch = useDispatch();
-  const state = useSelector((state: Discussion[]) => state);
+  const data = useFetch(DISCUSSIONS_URL);
 
-  useFetch();
   useEffect(() => {
-    setCurrentItems(state.slice(0, itemsPerPage));
-  }, [state]);
-
-  type ItemsPerPage = 4 | 5;
-  const itemsPerPage: ItemsPerPage = 4;
+    setCurrentItems(data.slice(0, ITEMS_PER_PAGE));
+  }, [data]);
 
   const handlePageChange = (page: number) => {
-    const indexOfLastItem: number = page * itemsPerPage;
-    const indexOfFirstItem: number = indexOfLastItem - itemsPerPage;
-    setCurrentItems(state.slice(indexOfFirstItem, indexOfLastItem));
+    const indexOfLastItem: number = page * ITEMS_PER_PAGE;
+    const indexOfFirstItem: number = indexOfLastItem - ITEMS_PER_PAGE;
+    setCurrentItems(data.slice(indexOfFirstItem, indexOfLastItem));
   };
 
   const [isUpdateBtnClicked, setIsUpdateBtnClicked] = useState(false);
@@ -57,7 +54,7 @@ function Pagination() {
       return;
     }
 
-    const discussionToUpdate: Discussion | undefined = state.find(
+    const discussionToUpdate: Discussion | undefined = data.find(
       (discussion: Discussion) => discussion.id === id
     );
 
@@ -68,20 +65,19 @@ function Pagination() {
 
     if (discussionToUpdate) {
       const payload = { ...discussionToUpdate, title: updatedContent };
-      dispatch(updateDiscussion(payload));
+      // dispatch(updateDiscussion(payload));
     }
     setIsUpdateBtnClicked(false);
   };
+
+  const deleteData = useDelete(DISCUSSIONS_URL);
 
   const handleDelete = (id: number) => {
     if (isUpdateBtnClicked) {
       setIsUpdateBtnClicked(false);
       return;
     }
-    const targetItem: Discussion | undefined = state.find(
-      (item: Discussion) => item.id === id
-    );
-    if (targetItem) dispatch(deleteDiscussion(targetItem));
+    deleteData(id);
   };
 
   return (
@@ -128,7 +124,7 @@ function Pagination() {
             </Card>
           ))}
         </ul>
-        <PageBtns totalPages={state.length} onPageChange={handlePageChange} />
+        <PageBtns totalPages={data.length} onPageChange={handlePageChange} />
       </DiscussionsWrapper>
     </Board>
   );

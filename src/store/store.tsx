@@ -1,5 +1,7 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { useDelete } from "../util/useDelete";
+import { DISCUSSIONS_URL } from "../util/constant";
 
 export type Discussion = {
   answer: {
@@ -76,12 +78,11 @@ export const discussion = createSlice({
       state: Discussion[],
       action: PayloadAction<Discussion>
     ) => {
-      // localStorage.removeItem(String(action.payload.id));
-
       tostify("delete");
 
       return state.filter((item: Discussion) => item.id !== action.payload.id);
     },
+
     updateDiscussion: (
       state: Discussion[],
       action: PayloadAction<Discussion>
