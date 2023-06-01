@@ -1,26 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Discussion } from "../store/store";
+import { Discussion, createDiscussion } from "../store/store";
+import { useDispatch } from "react-redux";
 
-type Fetch = [
-  data: Discussion[],
-  fetchData: (author?: string) => Promise<void>
-];
-
-export const useFetch = (url: string) => {
-  // export const useFetch = (url: string): Fetch => {
+export const useFetch = (url: string): Discussion[] => {
+  const dispatch = useDispatch();
   const [data, setData] = useState<Discussion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = async (author?: string) => {
-    const queryParameter = author ? author : "";
-    console.log("쿼리파라미터", author);
+  const fetchData = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get(url);
-      console.log(response.data);
       setData(response.data);
+      dispatch(createDiscussion(response.data));
     } catch (error: any) {
       setError(error);
     } finally {
