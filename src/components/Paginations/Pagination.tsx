@@ -17,7 +17,6 @@ import {
   BtnWrapper,
   Btn,
 } from "./PaginationStyle";
-import Search from "./Search";
 import { useFetch } from "../../util/useFetch";
 import { useDelete } from "../../util/useDelete";
 import { DISCUSSIONS_URL, ITEMS_PER_PAGE } from "../../util/constant";
@@ -86,7 +85,6 @@ function Pagination() {
   return (
     <Board>
       <DiscussionsWrapper>
-        <Search />
         <ul>
           {currentItems?.map((discussion) => (
             <Card key={discussion.id}>
