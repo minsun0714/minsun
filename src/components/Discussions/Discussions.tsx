@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Pagination from "../Paginations/Pagination";
-import { useDispatch } from "react-redux";
 import { Main, Board, Question, SubmitBtn } from "./DiscussionStyle";
 import { DISCUSSIONS_URL } from "../../util/constant";
 import { usePost } from "../../util/usePost";

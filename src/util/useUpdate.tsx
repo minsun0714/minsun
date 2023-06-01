@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { createDiscussion, updateDiscussion } from "../store/store";
+import { updateDiscussion } from "../store/store";
 import { useDispatch } from "react-redux";
 import { Discussion } from "./type";
 
