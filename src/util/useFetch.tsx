@@ -1,25 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { createDiscussion } from "../store/store";
 import { Discussion } from "../store/store";
 
-export default function useFetch() {
-  const dispatch = useDispatch();
-  const state = useSelector((state: Discussion[]) => state);
+type Fetch = [
+  data: Discussion[],
+  fetchData: (author?: string) => Promise<void>
+];
+
+export const useFetch = (url: string) => {
+  // export const useFetch = (url: string): Fetch => {
+  const [data, setData] = useState<Discussion[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchData = async (author?: string) => {
+    const queryParameter = author ? author : "";
+    console.log("쿼리파라미터", author);
+    try {
+      setIsLoading(true);
+      const response = await axios.get(url);
+      console.log(response.data);
+      setData(response.data);
+    } catch (error: any) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (state.length === 0) {
-      axios
-        .get("http://localhost:4000/discussions/")
-        .then((response) => {
-          for (let i = response.data.length - 1; i >= 0; i--) {
-            dispatch(createDiscussion(response.data[i]));
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
-}
+    fetchData();
+  }, [url]);
+
+  return data;
+};
