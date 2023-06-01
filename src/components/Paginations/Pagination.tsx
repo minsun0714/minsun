@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageBtns from "./PageBtns";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteDiscussion,
-  updateDiscussion,
-  Discussion,
-} from "../../store/store";
+import { Discussion } from "../../util/type";
 import {
   Board,
   DiscussionsWrapper,
