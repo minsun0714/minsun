@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Discussion, createDiscussion } from "../store/store";
 import { useDispatch } from "react-redux";
+import { createDiscussion } from "../store/store";
+import { Discussion } from "./type";
 
 export const usePost = (url: string, HTTPRequestPayload: Discussion) => {
   const dispatch = useDispatch();

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "../Paginations/Pagination";
 import { useDispatch } from "react-redux";
-import { createDiscussion } from "../../store/store";
 import { Main, Board, Question, SubmitBtn } from "./DiscussionStyle";
 import { DISCUSSIONS_URL } from "../../util/constant";
 import { usePost } from "../../util/usePost";
@@ -9,7 +8,6 @@ import { usePost } from "../../util/usePost";
 function Discussions() {
   const [userName, setUserName] = useState("");
   const [discussionTitle, setDiscussionTitle] = useState("");
-  const dispatch = useDispatch();
 
   const onChangeUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.currentTarget.value);

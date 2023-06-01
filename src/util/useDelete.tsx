@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Discussion, deleteDiscussion } from "../store/store";
+import { deleteDiscussion } from "../store/store";
+import { Discussion } from "../util/type";
 
 type Delete = (id: number) => Promise<void>;
 

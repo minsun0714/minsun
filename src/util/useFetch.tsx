@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Discussion, createDiscussion } from "../store/store";
+import { createDiscussion } from "../store/store";
 import { useDispatch } from "react-redux";
+import { Discussion } from "./type";
 
 export const useFetch = (url: string): Discussion[] => {
   const dispatch = useDispatch();
