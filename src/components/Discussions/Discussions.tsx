@@ -3,6 +3,8 @@ import Pagination from "../Paginations/Pagination";
 import { useDispatch } from "react-redux";
 import { createDiscussion } from "../../store/store";
 import { Main, Board, Question, SubmitBtn } from "./DiscussionStyle";
+import { DISCUSSIONS_URL } from "../../util/constant";
+import { usePost } from "../../util/usePost";
 
 function Discussions() {
   const [userName, setUserName] = useState("");
@@ -19,24 +21,28 @@ function Discussions() {
     setDiscussionTitle(event.currentTarget.value);
   };
 
+  const newDiscussion = {
+    answer: null,
+    author: userName,
+    avatarURL: null,
+    bodyHTML: null,
+    createdAt: JSON.stringify(new Date()),
+    id: Date.now(),
+    url: null,
+    title: discussionTitle,
+    updatedAt: null,
+  };
+
+  const createData = usePost(DISCUSSIONS_URL, newDiscussion);
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (userName.length === 0 || discussionTitle.length === 0) return;
-    dispatch(
-      createDiscussion({
-        answer: null,
-        author: userName,
-        avatarURL: null,
-        bodyHTML: null,
-        createdAt: JSON.stringify(new Date()),
-        id: Date.now(),
-        url: null,
-        title: discussionTitle,
-        updatedAt: null,
-      })
-    );
+    if (userName.length > 0 && discussionTitle.length > 0) {
+      createData();
+    }
     setUserName("");
     setDiscussionTitle("");
+    window.location.reload();
   };
 
   return (
