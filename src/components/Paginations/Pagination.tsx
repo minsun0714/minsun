@@ -85,7 +85,7 @@ function Pagination() {
       <DiscussionsWrapper>
         <Search />
         <ul>
-          {currentItems.map((discussion) => (
+          {currentItems?.map((discussion) => (
             <Card key={discussion.id}>
               {isUpdateBtnClicked && discussion.id === targetId ? (
                 <Content>
@@ -100,7 +100,7 @@ function Pagination() {
               ) : (
                 <Content>
                   <Title>
-                    {discussion.title.length > 40
+                    {discussion.title?.length > 40
                       ? discussion.title.slice(0, 40) + "..."
                       : discussion.title}
                   </Title>
