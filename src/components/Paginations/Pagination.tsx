@@ -21,6 +21,7 @@ import Search from "./Search";
 import { useFetch } from "../../util/useFetch";
 import { useDelete } from "../../util/useDelete";
 import { DISCUSSIONS_URL, ITEMS_PER_PAGE } from "../../util/constant";
+import { useUpdate } from "../../util/useUpdate";
 
 function Pagination() {
   const [currentItems, setCurrentItems] = useState<Discussion[]>([]);
@@ -46,6 +47,8 @@ function Pagination() {
     setUpdatedContent(event.currentTarget.value);
   };
 
+  const updateData = useUpdate();
+
   const handleUpdate = (id: number, title: string) => {
     if (!isUpdateBtnClicked) {
       setIsUpdateBtnClicked(true);
@@ -65,7 +68,7 @@ function Pagination() {
 
     if (discussionToUpdate) {
       const payload = { ...discussionToUpdate, title: updatedContent };
-      // dispatch(updateDiscussion(payload));
+      updateData(DISCUSSIONS_URL, id, payload);
     }
     setIsUpdateBtnClicked(false);
   };
